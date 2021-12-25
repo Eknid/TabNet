@@ -82,7 +82,8 @@ class TabEncoder(tf.keras.Model):
         
 
     def get_config(self):
-        config = super(TabEncoder, self).get_config()
+        #config = super(TabEncoder, self).get_config()
+        config = {}
         config['dim_imp'] = self.dim_imp
         config['dim_d'] = self.dim_d
         config['dim_a'] = self.dim_a
@@ -97,7 +98,7 @@ class TabEncoder(tf.keras.Model):
         return config
 
     def call(self, inp, training=None):
-        x = self.bn(inp, training=True)
+        x = self.bn(inp, training=training)
         y = self.shared_dec_steps(x, training=training)
         y = self.dec_steps(y, training=training)
         if self.split:

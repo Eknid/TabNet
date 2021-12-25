@@ -64,7 +64,8 @@ class TabNet(tf.keras.Model):
         
 
     def get_config(self):
-        config = super(TabNet, self).get_config()
+        #config = super(TabNet, self).get_config()
+        config = {}
         config['dim_imp'] = self.dim_imp
         config['dim_d'] = self.dim_d
         config['dim_a'] = self.dim_a
@@ -83,7 +84,7 @@ class TabNet(tf.keras.Model):
 
     def call(self, inp, training=None):
         x = self.input_features(inp)
-        output, _ = self.encoder(x, training=True)
+        output, _ = self.encoder(x, training)
         output = self.final(output)
         return output
 
