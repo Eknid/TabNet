@@ -84,12 +84,13 @@ class TabNet(tf.keras.Model):
 
     def call(self, inp, training=None):
         x = self.input_features(inp)
-        output, _ = self.encoder(x, training)
+        output, _ = self.encoder(x, training=training)
         output = self.final(output)
         return output
 
     def explain(self, inp):
-        _, importance = self.encoder(inp)
+        x = self.input_features(inp)
+        _, importance = self.encoder(x)
         return importance
 
 
